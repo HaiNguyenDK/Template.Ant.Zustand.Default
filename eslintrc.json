@@ -1,0 +1,59 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended",
+    "typescript",
+    "typescript/react",
+    "typescript/prettier",
+    "typescript/prettier-react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "filenames",
+    "jest"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": [
+      "off"
+    ],
+    "react/jsx-uses-react": [
+      "off"
+    ],
+    "react/jsx-props-no-spreading": [
+      "warn"
+    ],
+    "react/no-unescaped-entities": [
+      "off"
+    ],
+    "filenames/no-index": "error",
+    "filenames/match-exported": [
+      "error",
+      "kebab"
+    ],
+    "jest/no-disabled-tests": "error",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "error"
+  }
+}
