@@ -1,13 +1,14 @@
 import { authRole } from "../../../shared/constants/AppConst";
+import { ReactComponent as AvatarDefault } from '../../../assets/user/avatar-default.svg';
 
 export const getUserFromJwtAuth = (user: any) => {
   if (user)
     return {
       id: 1,
       uid: 1,
-      displayName: user?.name ? user.name : "Admin",
-      email: user?.email ? user.emai : 'admin@gmail.com',
-      photoURL: user?.photoURL ? user.photoURL : "/assets/images/avatar/A11.jpg",
+      displayName: user?.name ? user.name : "My name",
+      email: user?.email ? user.emai : '',
+      photoURL: user?.photoURL ? <img src={user.photoURL} alt='avatar' /> : <AvatarDefault />,
       role: authRole.user,
       accountId: user?.accountId || 0,
       companyId: user?.companyId || 0,

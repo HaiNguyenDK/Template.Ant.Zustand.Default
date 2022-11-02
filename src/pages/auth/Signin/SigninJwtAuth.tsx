@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import {useIntl} from 'react-intl';
+import { useNavigate } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import IntlMessages from '../../../@leo/utility/IntlMessages';
 import { useAuthMethod } from '../../../@leo/utility/AuthHooks';
@@ -22,7 +23,7 @@ const SignInJwtAuth = () => {
     console.log(`checked = ${e.target.checked}`);
   }
 
-  const {messages} = useIntl();
+  const { messages } = useIntl();
 
   return (
     <div className='sign'>
@@ -32,23 +33,23 @@ const SignInJwtAuth = () => {
           name='basic'
           initialValues={{
             remember: true,
-            email: 'myemail.demo@gmail.com',
-            password: 'Pass@1!@all',
+            email: '',
+            password: '',
           }}
           onFinish={(data) => { signInUser({ password: data.password, userName: data.email }) }}
           onFinishFailed={onFinishFailed}>
           <Form.Item
             name='email'
             className='form-field'
-            rules={[{ required: true, message: 'Please input your Email!' }]}>
-            <Input placeholder={messages['common.email'] as string} />
+            rules={[{ required: true, message: messages['common.login.pleaseUsername'] as string }]}>
+            <Input prefix={<LockOutlined className="site-form-item-icon" />} placeholder={messages['common.login.placeholderUsername'] as string} />
           </Form.Item>
 
           <Form.Item
             name='password'
             className='form-field'
-            rules={[{ required: true, message: 'Please input your Password!' }]}>
-            <Input.Password placeholder={messages['common.password'] as string} />
+            rules={[{ required: true, message: messages['common.login.pleasePassword'] as string }]}>
+            <Input.Password prefix={<UserOutlined className="site-form-item-icon" />} placeholder={messages['common.login.placeholderPassword'] as string} />
           </Form.Item>
 
           <div className='rememberMe'>
@@ -66,15 +67,7 @@ const SignInJwtAuth = () => {
               <IntlMessages id='common.login' />
             </Button>
           </div>
-
-          <div className='form-field-action'>
-            <span className='sign-text-grey'>
-              <IntlMessages id='common.dontHaveAccount' />
-            </span>
-            <Link to='/signup' className='underlineNone colorTextPrimary'>
-              <IntlMessages id='common.signup' />
-            </Link>
-          </div>
+          <p className='suppor-register'><IntlMessages id='common.login.supportRegister' /></p>
         </Form>
       </div>
     </div>

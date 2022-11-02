@@ -10,7 +10,8 @@
   color: @text-color;
   text-transform: capitalize;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: @text-color;
     background-color: transparent;
   }
@@ -25,19 +26,18 @@
     align-items: center;
     justify-content: center;
     font-size: 20px;
-    background-color: @body-background;
-    color: @text-color-secondary;
+    background-color: transparent;
+    color: @text-color-white;
     padding: 9px;
-    border-radius: @border-radius-circle;
-    border: @border-style-base @border-width-base transparent;
     margin-left: 7.4px;
     margin-right: 7.4px;
     line-height: 1;
 
-    &:hover, &:focus {
-      color: @text-color;
-      background-color: lighten(@body-background, 0.5);
-      border-color: darken(@body-background, 10);
+    &:hover,
+    &:focus {
+      color: @text-color-white;
+      background-color: transparent;
+      // border-color: darken(@body-background, 10);
     }
   }
 }
@@ -52,6 +52,16 @@
   }
 }
 
+
+.header-lang-scroll-submenu {
+  height: 200px;
+  min-width: 160px;
+
+  @media screen and (min-width: @screen-xxl) {
+    height: 260px;
+  }
+}
+
 .lang-icon {
   position: relative;
   display: none;
@@ -62,6 +72,7 @@
 }
 
 .langItem {
+  padding: 12px 20px;
   width: 160px;
   display: flex;
   flex-direction: row;
@@ -82,4 +93,8 @@
       font-size: @font-size-lg;
     }
   }
+}
+
+.langItem:hover {
+  background-color: white;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import notification from '../../services/db/notifications/notification';
-import { List, Button, Dropdown, Menu } from 'antd';
+import { List, Button, Dropdown, MenuProps } from 'antd';
 
 import AppScrollbar from '../AppScrollbar';
 import IntlMessages from '../../utility/IntlMessages';
@@ -9,11 +9,10 @@ import './index.style.less';
 import { IoIosNotificationsOutline } from 'react-icons/io';
 
 const AppNotifications = () => {
-  const dataNotifications: any = [
+  const items: MenuProps['items'] = [
     {
       key: 'header-1',
       label: (<div className='header'><IntlMessages id='common.notifications' />({notification.length})</div>),
-      type: 'item',
     },
     {
       key: 'header-2',
@@ -28,7 +27,6 @@ const AppNotifications = () => {
           />
         </AppScrollbar>
       ),
-      type: 'item',
     },
     {
       key: 'header-3',
@@ -37,15 +35,11 @@ const AppNotifications = () => {
           <IntlMessages id='common.viewAll' />
         </Button>
       ),
-      type: 'item',
     },
   ];
-  const menu = (
-    <Menu className='notify-header-message' items={dataNotifications} />
-  );
 
   return (
-    <Dropdown overlay={menu} className='dropdown' trigger={['click']}>
+    <Dropdown menu={{ items, className: 'notify-header-message' }} className='dropdown' trigger={['click']}>
       <a className='notify-link' onClick={(e) => e.preventDefault()} href="/#">
         <span className='notify-icon'>
           <IoIosNotificationsOutline />

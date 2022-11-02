@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card } from 'antd';
 import AppAnimateGroup from '../../@leo/core/AppAnimateGroup';
 import './AuthWrapper.style.less';
 import AppInfoView from '../../@leo/core/AppInfoView';
+import IntlMessages from '../../@leo/utility/IntlMessages';
 
 interface IAuthWrapper {
   children: React.ReactNode;
@@ -16,24 +16,19 @@ const AuthWrapper: React.FC<IAuthWrapper> = ({ children }) => {
       interval={10}
       duration={200}>
       <div className='auth-wrap' key={'wrap'}>
-        <Card className='auth-card'>
+        <div className='auth-card'>
           <div className='auth-main-content'>
-            {/* <div className='auth-card-header'>
-              <AppLogo />
-            </div> */}
+            <div className='auth-card-header'>
+              <div className='auth-card-content'>
+                <p className='auth-card-title'><IntlMessages id='common.wrapper.title.logo' /></p>
+                <p className='auth-card-description'><IntlMessages id='common.wrapper.description.logo' /></p>
+              </div>
+            </div>
             {children}
           </div>
-          <div className='auth-wel-action'>
-            <div className='auth-wel-content'>
-              <h2>Welcome to Service!</h2>
-              <p>
-                Service is purely based on Ant Design components and follows Ant
-                Design guidelines.
-              </p>
-            </div>
-          </div>
-        </Card>
+        </div>
       </div>
+      <p className='text-coppy-right'><IntlMessages id='common.wrapper.auth.coppyRight' /></p>
       <AppInfoView />
     </AppAnimateGroup>
   );

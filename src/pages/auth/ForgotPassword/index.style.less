@@ -10,6 +10,7 @@
 .forget-para {
   line-height: 1.5;
   margin-bottom: 24px;
+  padding: 0px 2px;
   font-size: @font-size-base;
 
   @media screen and (min-width: @screen-xxl) {
@@ -28,7 +29,16 @@
   flex-direction: column;
 
   & .form-field {
-    margin-bottom: 20px;
+    margin-bottom: 28px;
+  }
+
+  & .ant-form-item-control-input-content input {
+    padding: 8px 10px;
+  }
+
+  & .ant-form-item-explain-error {
+    padding-top: 4px;
+    font-size: 13px;
   }
 }
 

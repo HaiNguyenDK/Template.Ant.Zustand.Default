@@ -1,59 +1,58 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { Avatar, Dropdown, List } from 'antd';
-import { FaChevronDown } from 'react-icons/fa';
-import './index.style.less';
+import { Avatar, Dropdown, List, MenuProps } from 'antd';
 import { useThemeContext } from '../../../../utility/AppContextProvider/ThemeContextProvider';
 import { useAuthMethod, useAuthUser } from '../../../../utility/AuthHooks';
-import { useSidebarContext } from '../../../../utility/AppContextProvider/SidebarContextProvider';
+import { ReactComponent as AvatarDefault } from '../../../../../assets/user/avatar-default.svg';
+
+import './index.style.less';
+import { useIntl } from 'react-intl';
 
 interface IUserInfo {
   hasColor?: boolean;
+  isCollapsed: boolean;
 }
 
-const UserInfo: React.FC<IUserInfo> = ({ hasColor }) => {
+const UserInfo: React.FC<IUserInfo> = ({ hasColor, isCollapsed }) => {
   const { themeMode } = useThemeContext();
   const { logout } = useAuthMethod();
   const { user } = useAuthUser();
+  const { messages } = useIntl();
   const history = useNavigate();
-  const { sidebarColorSet } = useSidebarContext();
-  const { isSidebarBgImage } = useSidebarContext();
 
-  const getUserAvatar = () => {
-    if (user.displayName) {
-      return user.displayName.charAt(0).toUpperCase();
-    }
-    if (user.email) {
-      return user.email.charAt(0).toUpperCase();
-    }
-  };
+  const dataOptionUser = [
+    { id: '1', title: messages['common.header.option.myInfo'] as string, onClick: () => history('/extra-pages/user-profile') },
+    { id: '2', title: messages['common.header.option.logout'] as string, onClick: () => logout() },
+  ]
 
-  const menu = (
-    <List className='dropdown-list'>
-      <List.Item onClick={() => history('/extra-pages/user-profile')}>
-        My Profile
-      </List.Item>
-      <List.Item onClick={() => logout()}>Logout</List.Item>
-    </List>
-  );
+  const items: MenuProps['items'] = [
+    {
+      key: 'header-1',
+      label: (
+        <List className='dropdown-list'
+          dataSource={dataOptionUser}
+          renderItem={(item, index) => {
+            return (
+              <div key={index} onClick={item.onClick} className='option-user-item'>
+                {item.title}
+              </div>
+            );
+          }}
+        />),
+    },
+  ];
 
   return (
     <>
       {hasColor ? (
         <div
-          style={{
-            backgroundColor: isSidebarBgImage
-              ? ''
-              : sidebarColorSet?.sidebarHeaderColor || undefined,
-            color: sidebarColorSet?.sidebarTextColor || undefined,
-          }}
           className={clsx('cr-user-info cr-user-info-hasColor', {
             light: themeMode === 'light',
           })}>
           <Dropdown
             className='user-profile-dropdown'
-            overlay={menu}
+            menu={{ items, className: 'user-info-menu-items' }}
             trigger={['click']}
             placement='bottomRight'
             overlayStyle={{
@@ -64,9 +63,7 @@ const UserInfo: React.FC<IUserInfo> = ({ hasColor }) => {
               {user.photoURL ? (
                 <Avatar className='cr-user-info-avatar' src={user.photoURL} />
               ) : (
-                <Avatar className='cr-user-info-avatar'>
-                  {getUserAvatar()}
-                </Avatar>
+                <Avatar className='cr-user-info-avatar' src={<AvatarDefault />} />
               )}
               <span className='cr-user-info-content'>
                 <span className='cr-user-name-info'>
@@ -74,14 +71,8 @@ const UserInfo: React.FC<IUserInfo> = ({ hasColor }) => {
                     className={clsx('cr-user-name text-truncate', {
                       light: themeMode === 'light',
                     })}>
-                    {user.displayName ? user.displayName : 'admin user '}
+                    {user.displayName ? user.displayName : 'My name'}
                   </h3>
-                  <span className='cr-user-arrow'>
-                    <FaChevronDown />
-                  </span>
-                </span>
-                <span className='cr-user-designation text-truncate'>
-                  System Manager
                 </span>
               </span>
             </a>
@@ -94,7 +85,7 @@ const UserInfo: React.FC<IUserInfo> = ({ hasColor }) => {
           })}>
           <Dropdown
             className='user-profile-dropdown'
-            overlay={menu}
+            menu={{ items, className: 'user-info-menu-items' }}
             trigger={['click']}
             placement='bottomRight'
             overlayStyle={{
@@ -105,26 +96,8 @@ const UserInfo: React.FC<IUserInfo> = ({ hasColor }) => {
               {user.photoURL ? (
                 <Avatar className='cr-user-info-avatar' src={user.photoURL} />
               ) : (
-                <Avatar className='cr-user-info-avatar'>
-                  {getUserAvatar()}
-                </Avatar>
+                <Avatar className='cr-user-info-avatar' src={<AvatarDefault />} />
               )}
-              <span className='cr-user-info-content'>
-                <span className='cr-user-name-info'>
-                  <h3
-                    className={clsx('cr-user-name text-truncate', {
-                      light: themeMode === 'light',
-                    })}>
-                    {user.displayName ? user.displayName : 'admin user '}
-                  </h3>
-                  <span className='cr-user-arrow'>
-                    <FaChevronDown />
-                  </span>
-                </span>
-                <span className='cr-user-designation text-truncate'>
-                  System Manager
-                </span>
-              </span>
             </a>
           </Dropdown>
         </div>

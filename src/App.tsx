@@ -4,7 +4,7 @@ import {
   AuthRoutes,
 } from './@leo';
 import JWTAuthAuthProvider from './@leo/services/auth/jwt-auth/JWTAuthProvider';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import AppLocaleProvider from './@leo/utility/AppLocaleProvider';
 import AppThemeProvider from './@leo/utility/AppThemeProvider';
 import AppContextProvider from './@leo/utility/AppContextProvider';
@@ -15,7 +15,7 @@ const App = () => {
     <AppContextProvider>
       <AppThemeProvider>
         <AppLocaleProvider>
-          <Router>
+          <BrowserRouter>
             <React.Fragment>
               <JWTAuthAuthProvider>
                 <AuthRoutes>
@@ -23,7 +23,7 @@ const App = () => {
                 </AuthRoutes>
               </JWTAuthAuthProvider>
             </React.Fragment>
-          </Router>
+          </BrowserRouter>
         </AppLocaleProvider>
       </AppThemeProvider>
     </AppContextProvider>

@@ -2,19 +2,13 @@
 @import '../../../../../shared/styles/mixin';
 
 .cr-user-info {
-  background-color: transparent;
-  padding: 7px 12px;
-  min-height: 56px;
+  background-color: @header-bg-color;
+  height: 48px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   .transition(all .2s ease);
-
-  @media screen and (min-width: @screen-md) {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    min-height: 71px;
-  }
 
   & .ant-dropdown-link {
     color: inherit;
@@ -38,26 +32,33 @@
 .cr-user-info-inner {
   display: flex;
   align-items: center;
+  margin-left: 12px;
 }
 
 .cr-user-info-avatar {
   font-size: 24px;
   background-color: @orange-6;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .cr-user-info-content {
-  width: calc(100% - 62px);
-  margin-left: 16px;
+  min-width: 60px;
+  max-width: 100px;
+  margin-left: 12px;
   .transition(all .2s ease);
+  display: none;
 
   [dir=rtl] & {
     margin-left: 0;
     margin-right: 16px;
+  }
+
+  @media screen and (min-width: @screen-md) {
+    display: block;
   }
 }
 
@@ -104,13 +105,40 @@
   }
 }
 
+.user-info-menu-items {
+  background-color: @header-bg-color;
+
+  & .ant-dropdown-menu-item {
+    padding: 0;
+    white-space: normal;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &.header {
+      padding: 12px 20px;
+      font-weight: @font-weight-medium;
+      cursor: inherit;
+
+      &:hover, &:focus {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
 .dropdown-list {
-  & .ant-list-item {
-    padding: 5px 12px;
+  background-color: @header-bg-color;
+  color: @text-color-white;
+  
+  & .option-user-item {
+    padding: 8px 12px;
+    color: @text-color-white;
     cursor: pointer;
 
     &:hover {
-      background-color: darken(@component-background, 3);
+      background-color: darken(@header-bg-color, 3);
     }
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
 import IntlMessages from '../../../@leo/utility/IntlMessages';
+import { useIntl } from 'react-intl';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
@@ -12,13 +13,14 @@ const onFinishFailed = (errorInfo: any) => {
 };
 
 const ForgetPasswordJwtAuth = () => {
+  const { messages } = useIntl();
 
   return (
     <div className='forget-content'>
       <p className='forget-para'>
-        <IntlMessages id='common.forgetPasswordTextOne' />
+        <IntlMessages id='common.forgetPassword.TextOne' />
         <span>
-          <IntlMessages id='common.forgetPasswordTextTwo' />
+          <IntlMessages id='common.forgetPassword.TextTwo' />
         </span>
       </p>
 
@@ -32,21 +34,21 @@ const ForgetPasswordJwtAuth = () => {
           name='email'
           className='form-field'
           rules={[
-            { required: true, message: 'Please input your Email Address!' },
+            { required: true, message: messages['common.forgetPassword.pleaseEmail'] as string },
           ]}>
-          <Input placeholder={''} />
+          <Input placeholder={messages['common.forgetPassword.placeholderEmailSend'] as string} />
         </Form.Item>
 
         <div className='form-field'>
           <Button type='primary' htmlType='submit' className='forget-btn'>
-            <IntlMessages id='common.sendNewPassword' />
+            <IntlMessages id='common.forgetPassword.sendNewPassword' />
           </Button>
         </div>
 
         <p className='forget-footer'>
           <IntlMessages id='common.alreadyHavePassword' />
           <Link to='/signin'>
-            <IntlMessages id='common.signIn' />
+            <IntlMessages id='common.forgetPassword.signIn' />
           </Link>
         </p>
       </Form>

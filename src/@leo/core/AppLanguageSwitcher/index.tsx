@@ -1,7 +1,6 @@
 import React from 'react';
-import languageData from './data';
 
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, List } from 'antd';
 import './index.style.less';
 import { ThemeDirection } from '../../../shared/constants/AppEnums';
 import {
@@ -10,6 +9,8 @@ import {
 } from '../../utility/AppContextProvider/LocaleContextProvide';
 import { useLayoutActionsContext } from '../../utility/AppContextProvider/LayoutContextProvider';
 import { IoLanguageOutline } from 'react-icons/io5';
+import languageData from '../AppLngSwitcher/data';
+import AppScrollbar from '../AppScrollbar';
 
 interface IAppLanguageSwitcher {
   iconOnly?: boolean;
@@ -29,26 +30,29 @@ const AppLanguageSwitcher: React.FC<IAppLanguageSwitcher> = ({ iconOnly }) => {
     updateLocale(language);
   };
 
-  const menu = (
-    <Menu id='language-switcher' items={languageData?.map((language, index) => {
-      return {
-        key: index,
-        label: (
-          <div className='langItem'>
-            <i className={`flag flag-24 flag-${language.icon}`} />
-            <h4>{language.name}</h4>
-          </div>
-        ),
-        type: 'item',
-        onClick: () => changeLanguage(language)
-      }
-    })} />
-  );
+  const items = [{
+    key: 'key-1',
+    label: (
+      <AppScrollbar className='header-lang-scroll-submenu'>
+        <List
+          dataSource={languageData}
+          renderItem={(item, index) => {
+            return (
+              <div key={index} onClick={() => changeLanguage(item)} className='langItem'>
+                <i className={`flag flag-24 flag-${item.icon}`} />
+                <h4>{item.name}</h4>
+              </div>
+            );
+          }}
+        />
+      </AppScrollbar>
+    )
+  }];
 
   return (
     <>
       <Dropdown
-        overlay={menu}
+        menu={{ items, id: 'language-switcher' }}
         trigger={['click']}
         overlayStyle={{ zIndex: 1052 }}>
         <a
